@@ -19,7 +19,7 @@ namespace _20483_Colecciones
             cProcesosLibreria libreria = new cProcesosLibreria();
             cLibro libro;
 
-            while(opcion >= 1 && opcion <= 4)
+            while (opcion >= 1 && opcion <= 7)
             {
 
                 Console.WriteLine("\nA Continuación le mostraremos las diferentes acciones que puede realizar en el sistema.");
@@ -27,13 +27,17 @@ namespace _20483_Colecciones
                 Console.WriteLine("2. Prestar Libro");
                 Console.WriteLine("3. Validar cantidad de libros disponibles");
                 Console.WriteLine("4. Mostrar Libros disponibles");
-                Console.WriteLine("5. Salir");
+                Console.WriteLine("5. Registrar Precio");
+                Console.WriteLine("6. Consultar Precio");
+                Console.WriteLine("7. Consultar todos los precios");
+                Console.WriteLine("8. Salir");
                 valor = Console.ReadLine();
                 opcion = int.Parse(valor);
 
-                switch (opcion) {
+                switch (opcion)
+                {
                     case 1:
-                        libro = new cLibro();          
+                        libro = new cLibro();
                         Console.WriteLine("Bienvenido al sistema de registro de libros, por favor indique los siguiente datos:");
                         Console.WriteLine("Nombre del libro:");
                         libro.Nombre = Console.ReadLine();
@@ -58,13 +62,25 @@ namespace _20483_Colecciones
                     case 4:
                         libreria.MostrarLibrosDisponibles();
                         break;
-                        
-                }                
+
+                    case 5:
+                        libreria.RegistrarPrecioLibro();
+                        break;
+
+                    case 6:
+                        libreria.ConsultarPrecioLibro();
+                        break;
+
+                    case 7:
+                        libreria.ConsultarListaDePrecios();
+                        break;
+
+                }
 
             }
 
             Console.ReadKey();
-            
+
         }
     }
 }

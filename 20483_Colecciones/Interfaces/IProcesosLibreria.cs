@@ -18,5 +18,13 @@ namespace _20483_Colecciones.Interfaces
         cLibro PrestarLibro();
 
         void MostrarLibrosDisponibles();
+
+        void EliminarLibro();
+
+        void RegistrarPrecioLibro();
+
+        void ConsultarListaDePrecios();
+
+        void ConsultarPrecioLibro();
     }
 }
