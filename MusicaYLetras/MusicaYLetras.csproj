@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6EB43F19-D960-4F99-94AE-CC08E6D30D3F}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{BB4F9630-67F4-4013-A508-55D0251CAD9F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>cDTO</RootNamespace>
-    <AssemblyName>cDTO</AssemblyName>
+    <RootNamespace>MusicaYLetras</RootNamespace>
+    <AssemblyName>MusicaYLetras</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -39,19 +39,60 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cCliente.cs" />
-    <Compile Include="cEdiMarcaSello.cs" />
-    <Compile Include="cFactura.cs" />
-    <Compile Include="cInventario.cs" />
-    <Compile Include="cProducto.cs" />
-    <Compile Include="cPromocion.cs" />
-    <Compile Include="cTipo.cs" />
-    <Compile Include="Enumeradores\EEstado.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CContratos\cContratos.csproj">
+      <Project>{3b83f264-6234-433c-b781-dea0870b018a}</Project>
+      <Name>cContratos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\cDTO\cDTO.csproj">
+      <Project>{6eb43f19-d960-4f99-94ae-cc08e6d30d3f}</Project>
+      <Name>cDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CNegocio\cNegocio.csproj">
+      <Project>{6b680fd4-5a83-430f-9593-6c50be0f0350}</Project>
+      <Name>cNegocio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\cRepositorio\cRepositorio.csproj">
+      <Project>{80781cc0-e040-432b-aceb-54d415b91a8c}</Project>
+      <Name>cRepositorio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

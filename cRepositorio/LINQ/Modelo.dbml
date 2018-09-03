@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Libreria" Class="ModeloDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-Q35KOSF\SQLEXPRESS;Initial Catalog=Libreria;Integrated Security=True" SettingsObjectName="cRepositorio.Properties.Settings" SettingsPropertyName="LibreriaConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.CLIENTE" Member="CLIENTE">
+    <Type Name="CLIENTE">
+      <Column Name="IDENTCLIENTE" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NOMBRE" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="PRIAPELLIDO" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SEGAPELLIDO" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="TELEFONO" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="DIRECCION" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="CLIENTE_COMPRAS_CLIENTE" Member="COMPRAS_CLIENTE" ThisKey="IDENTCLIENTE" OtherKey="IDENTCLIENTE" Type="COMPRAS_CLIENTE" />
+      <Association Name="CLIENTE_FACTURAVENTA" Member="FACTURAVENTA" ThisKey="IDENTCLIENTE" OtherKey="IDENTCLIENTE" Type="FACTURAVENTA" />
+    </Type>
+  </Table>
+  <Table Name="dbo.COMPRAS_CLIENTE" Member="COMPRAS_CLIENTE">
+    <Type Name="COMPRAS_CLIENTE">
+      <Column Name="IDREGISTROCLIENTE" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IDENTCLIENTE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CANTIDADCOMPRAS" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="CLIENTE_COMPRAS_CLIENTE" Member="CLIENTE" ThisKey="IDENTCLIENTE" OtherKey="IDENTCLIENTE" Type="CLIENTE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EDIMARCASELLO_TIPO" Member="EDIMARCASELLO_TIPO">
+    <Type Name="EDIMARCASELLO_TIPO">
+      <Column Name="IDEDSEMA" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDTIPO" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="EDITORIAL_MARCA_SELLO_EDIMARCASELLO_TIPO" Member="EDITORIAL_MARCA_SELLO" ThisKey="IDEDSEMA" OtherKey="IDEDSEMA" Type="EDITORIAL_MARCA_SELLO" IsForeignKey="true" />
+      <Association Name="TIPO_EDIMARCASELLO_TIPO" Member="TIPO" ThisKey="IDTIPO" OtherKey="IDTIPO" Type="TIPO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EDITORIAL_MARCA_SELLO" Member="EDITORIAL_MARCA_SELLO">
+    <Type Name="EDITORIAL_MARCA_SELLO">
+      <Column Name="IDEDSEMA" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NOMBRE" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="EDITORIAL_MARCA_SELLO_EDIMARCASELLO_TIPO" Member="EDIMARCASELLO_TIPO" ThisKey="IDEDSEMA" OtherKey="IDEDSEMA" Type="EDIMARCASELLO_TIPO" />
+      <Association Name="EDITORIAL_MARCA_SELLO_PRODUCTO" Member="PRODUCTO" ThisKey="IDEDSEMA" OtherKey="IDEDSEMA" Type="PRODUCTO" />
+      <Association Name="EDITORIAL_MARCA_SELLO_PROMOCION" Member="PROMOCION" ThisKey="IDEDSEMA" OtherKey="IDEDSEMA" Type="PROMOCION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FACTURA_PRODUCTO" Member="FACTURA_PRODUCTO">
+    <Type Name="FACTURA_PRODUCTO">
+      <Column Name="NUMEROFACTURA" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDPRODUCTO" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CANTIDAD" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="FACTURAVENTA_FACTURA_PRODUCTO" Member="FACTURAVENTA" ThisKey="NUMEROFACTURA" OtherKey="NUMEROFACTURA" Type="FACTURAVENTA" IsForeignKey="true" />
+      <Association Name="PRODUCTO_FACTURA_PRODUCTO" Member="PRODUCTO" ThisKey="IDPRODUCTO" OtherKey="IDPRODUCTO" Type="PRODUCTO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FACTURAVENTA" Member="FACTURAVENTA">
+    <Type Name="FACTURAVENTA">
+      <Column Name="NUMEROFACTURA" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDENTCLIENTE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="COSTOTOTAL" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="FECHAFACTURA" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="FACTURAVENTA_FACTURA_PRODUCTO" Member="FACTURA_PRODUCTO" ThisKey="NUMEROFACTURA" OtherKey="NUMEROFACTURA" Type="FACTURA_PRODUCTO" />
+      <Association Name="CLIENTE_FACTURAVENTA" Member="CLIENTE" ThisKey="IDENTCLIENTE" OtherKey="IDENTCLIENTE" Type="CLIENTE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.INVENTARIO" Member="INVENTARIO">
+    <Type Name="INVENTARIO">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IDPRODUCTO" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CANTIDAD" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="PRODUCTO_INVENTARIO" Member="PRODUCTO" ThisKey="IDPRODUCTO" OtherKey="IDPRODUCTO" Type="PRODUCTO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PRODUCTO" Member="PRODUCTO">
+    <Type Name="PRODUCTO">
+      <Column Name="IDPRODUCTO" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NOMBRE" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="AUTOR" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="IDTIPO" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PRECIO" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="FECHAPUBLICACION" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="IDEDSEMA" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="PRODUCTO_FACTURA_PRODUCTO" Member="FACTURA_PRODUCTO" ThisKey="IDPRODUCTO" OtherKey="IDPRODUCTO" Type="FACTURA_PRODUCTO" />
+      <Association Name="PRODUCTO_INVENTARIO" Member="INVENTARIO" ThisKey="IDPRODUCTO" OtherKey="IDPRODUCTO" Type="INVENTARIO" />
+      <Association Name="EDITORIAL_MARCA_SELLO_PRODUCTO" Member="EDITORIAL_MARCA_SELLO" ThisKey="IDEDSEMA" OtherKey="IDEDSEMA" Type="EDITORIAL_MARCA_SELLO" IsForeignKey="true" />
+      <Association Name="TIPO_PRODUCTO" Member="TIPO" ThisKey="IDTIPO" OtherKey="IDTIPO" Type="TIPO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PROMOCION" Member="PROMOCION">
+    <Type Name="PROMOCION">
+      <Column Name="IDPROMO" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IDTIPO" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDEDSEMA" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FECHAINICIO" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FECHAFIN" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DESCUENTO" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ESTADO" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="EDITORIAL_MARCA_SELLO_PROMOCION" Member="EDITORIAL_MARCA_SELLO" ThisKey="IDEDSEMA" OtherKey="IDEDSEMA" Type="EDITORIAL_MARCA_SELLO" IsForeignKey="true" />
+      <Association Name="TIPO_PROMOCION" Member="TIPO" ThisKey="IDTIPO" OtherKey="IDTIPO" Type="TIPO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TIPO" Member="TIPO">
+    <Type Name="TIPO">
+      <Column Name="IDTIPO" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NOMBRE" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Association Name="TIPO_EDIMARCASELLO_TIPO" Member="EDIMARCASELLO_TIPO" ThisKey="IDTIPO" OtherKey="IDTIPO" Type="EDIMARCASELLO_TIPO" />
+      <Association Name="TIPO_PRODUCTO" Member="PRODUCTO" ThisKey="IDTIPO" OtherKey="IDTIPO" Type="PRODUCTO" />
+      <Association Name="TIPO_PROMOCION" Member="PROMOCION" ThisKey="IDTIPO" OtherKey="IDTIPO" Type="PROMOCION" />
+    </Type>
+  </Table>
+</Database>
