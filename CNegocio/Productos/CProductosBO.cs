@@ -19,5 +19,8 @@ namespace cNegocio.Productos
             RepositorioProductos = pRepoProductos;
             RepositorioInventario = pRepoInventario;
         }
+
+
+
     }
 }
