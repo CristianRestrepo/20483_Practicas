@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using cDTO;
 using System.Collections;
 
-namespace CContratos.Productos
+namespace cContratos.Productos
 {
     public interface IProductos
     {
-        bool RegistrarProducto(cProducto pProducto);
+        bool RegistrarProducto(cProducto pProducto, cInventario pInventario);
 
         bool ActualizarProducto(cProducto pProducto);
 

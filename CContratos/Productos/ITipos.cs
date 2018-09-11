@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace cDTO
+using cDTO;
+namespace cContratos.Productos
 {
-    public class cTipo
+    public interface ITipos
     {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-              
+        IEnumerable<cTipo> ConsultarTipos();
     }
 }

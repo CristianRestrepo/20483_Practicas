@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using cDTO;
 namespace cContratos.Productos
 {
-    interface IProcesosProducto
-    {        
-        
+    public interface IEditorialSelloMarca
+    {
+        IEnumerable<cEdiMarcaSello> ConsultarEdiMarcaSello();
     }
 }

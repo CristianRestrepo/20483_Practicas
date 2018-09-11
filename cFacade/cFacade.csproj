@@ -40,8 +40,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FProducto.cs" />
+    <Compile Include="fEditorialSelloMarca.cs" />
+    <Compile Include="fProducto.cs" />
+    <Compile Include="fTipo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CContratos\cContratos.csproj">
+      <Project>{3b83f264-6234-433c-b781-dea0870b018a}</Project>
+      <Name>cContratos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\cDTO\cDTO.csproj">
+      <Project>{6eb43f19-d960-4f99-94ae-cc08e6d30d3f}</Project>
+      <Name>cDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CNegocio\cNegocio.csproj">
+      <Project>{6b680fd4-5a83-430f-9593-6c50be0f0350}</Project>
+      <Name>cNegocio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\cRepositorio\cRepositorio.csproj">
+      <Project>{80781cc0-e040-432b-aceb-54d415b91a8c}</Project>
+      <Name>cRepositorio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

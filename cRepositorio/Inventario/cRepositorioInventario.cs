@@ -9,7 +9,7 @@ using cRepositorio.LINQ;
 
 namespace cRepositorio.Inventario
 {
-    class cRepositorioInventario : IInventario
+    public class cRepositorioInventario : IInventario
     {
         private ModeloDataContext contexto = new ModeloDataContext();
 
@@ -19,11 +19,12 @@ namespace cRepositorio.Inventario
             var inventario = from i in contexto.INVENTARIO
                              where i.ID.Equals(pInventario.Id)
                              select i;
-            foreach (INVENTARIO i in inventario) {
+            foreach (INVENTARIO i in inventario)
+            {
                 i.IDPRODUCTO = pInventario.IdProducto;
                 i.CANTIDAD = pInventario.Cantidad;
             }
-            
+
             try
             {
                 contexto.SubmitChanges();
@@ -65,7 +66,8 @@ namespace cRepositorio.Inventario
             return resultado;
         }
 
-        private void AsignarDTO(ref INVENTARIO pInventarioLINQ, cInventario pInventario) {
+        private void AsignarDTO(ref INVENTARIO pInventarioLINQ, cInventario pInventario)
+        {
             pInventarioLINQ.IDPRODUCTO = pInventario.IdProducto;
             pInventarioLINQ.CANTIDAD = pInventario.Cantidad;
         }

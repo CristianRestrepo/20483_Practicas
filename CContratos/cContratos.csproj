@@ -7,8 +7,8 @@
     <ProjectGuid>{3B83F264-6234-433C-B781-DEA0870B018A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CContratos</RootNamespace>
-    <AssemblyName>CContratos</AssemblyName>
+    <RootNamespace>cContratos</RootNamespace>
+    <AssemblyName>cContratos</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,8 +43,10 @@
     <Compile Include="Clientes\IClientes.cs" />
     <Compile Include="Facturacion\IFacturacion.cs" />
     <Compile Include="Inventario\IInventario.cs" />
+    <Compile Include="Productos\IEditorialSelloMarca.cs" />
     <Compile Include="Productos\IProcesosProducto.cs" />
     <Compile Include="Productos\IProductos.cs" />
+    <Compile Include="Productos\ITipos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

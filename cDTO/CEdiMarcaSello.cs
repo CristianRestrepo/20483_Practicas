@@ -8,7 +8,7 @@ namespace cDTO
 {
     public class cEdiMarcaSello
     {
-        private int id;
+        public int Id { get; set; }
         public string Nombre { get; set; }       
     }
 }

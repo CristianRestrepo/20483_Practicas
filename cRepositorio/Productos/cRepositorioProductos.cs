@@ -1,4 +1,4 @@
-﻿using CContratos.Productos;
+﻿using cContratos.Productos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ using System.Collections;
 
 namespace cRepositorio.Productos
 {
-    class cRepositorioProductos : IProductos
+    public class cRepositorioProductos : IProductos
     {
         private ModeloDataContext contexto = new ModeloDataContext();
 
@@ -57,14 +57,15 @@ namespace cRepositorio.Productos
         {
             ArrayList productos = new ArrayList();
             var productosQuery = from p in contexto.PRODUCTO
-                            where 
-                            SqlMethods.Like(p.AUTOR, "%" + pValor + "%") ||
-                            SqlMethods.Like(p.EDITORIAL_MARCA_SELLO.NOMBRE, "%" + pValor + "%") ||
-                            SqlMethods.Like(p.TIPO.NOMBRE, "%" + pValor + "%") ||
-                            SqlMethods.Like(p.NOMBRE, "%" + pValor + "%")
-                            select p;
+                                 where
+                                 SqlMethods.Like(p.AUTOR, "%" + pValor + "%") ||
+                                 SqlMethods.Like(p.EDITORIAL_MARCA_SELLO.NOMBRE, "%" + pValor + "%") ||
+                                 SqlMethods.Like(p.TIPO.NOMBRE, "%" + pValor + "%") ||
+                                 SqlMethods.Like(p.NOMBRE, "%" + pValor + "%")
+                                 select p;
 
-            foreach (PRODUCTO p in productosQuery) {
+            foreach (PRODUCTO p in productosQuery)
+            {
                 cProducto producto = new cProducto()
                 {
                     Id = p.IDPRODUCTO,
@@ -88,8 +89,7 @@ namespace cRepositorio.Productos
         public bool EliminarProducto(cProducto pProducto)
         {
             bool resultado = true;
-            PRODUCTO prod = new PRODUCTO();
-            AsignarDTO(ref prod, pProducto);
+            PRODUCTO prod = AsignarDTOProducto(pProducto);
             contexto.PRODUCTO.DeleteOnSubmit(prod);
 
             try
@@ -104,15 +104,18 @@ namespace cRepositorio.Productos
             return resultado;
         }
 
-        public bool RegistrarProducto(cProducto pProducto)
+        public bool RegistrarProducto(cProducto pProducto, cInventario pInventario)
         {
             bool resultado = true;
-            PRODUCTO prod = new PRODUCTO();
-            AsignarDTO(ref prod, pProducto);
-            contexto.PRODUCTO.InsertOnSubmit(prod);
-
             try
             {
+                PRODUCTO prod = AsignarDTOProducto(pProducto);
+                contexto.PRODUCTO.InsertOnSubmit(prod);                
+                contexto.SubmitChanges();
+                string producto = "" + prod.IDPRODUCTO;
+                pInventario.IdProducto = prod.IDPRODUCTO;
+                INVENTARIO inventario = AsignarDTOInventario(pInventario);
+                contexto.INVENTARIO.InsertOnSubmit(inventario);
                 contexto.SubmitChanges();
             }
             catch (Exception)
@@ -124,15 +127,27 @@ namespace cRepositorio.Productos
             return resultado;
         }
 
-        private void AsignarDTO(ref PRODUCTO pProductoLINQ, cProducto pProducto)
+        private PRODUCTO AsignarDTOProducto(cProducto pProducto)
         {
-            pProductoLINQ.IDPRODUCTO = pProducto.Id;
-            pProductoLINQ.NOMBRE = pProducto.Nombre;
-            pProductoLINQ.AUTOR = pProducto.Autor;
-            pProductoLINQ.IDTIPO = pProducto.IdTipo;
-            pProductoLINQ.IDEDSEMA = pProducto.IdEditorialSelloMarca;
-            pProductoLINQ.FECHAPUBLICACION = pProducto.FechaPublicacion;
-            pProductoLINQ.PRECIO = pProducto.Precio;
+            return new PRODUCTO()
+            {
+                IDPRODUCTO = pProducto.Id,
+                NOMBRE = pProducto.Nombre,
+                AUTOR = pProducto.Autor,
+                IDTIPO = pProducto.IdTipo,
+                IDEDSEMA = pProducto.IdEditorialSelloMarca,
+                FECHAPUBLICACION = pProducto.FechaPublicacion,
+                PRECIO = pProducto.Precio
+            };
+        }
+
+        private INVENTARIO AsignarDTOInventario(cInventario pInventario)
+        {
+            return new INVENTARIO()
+            {
+                IDPRODUCTO = pInventario.IdProducto,
+                CANTIDAD = pInventario.Cantidad
+            };
         }
     }
 }

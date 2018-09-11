@@ -88,6 +88,10 @@
       <Project>{6eb43f19-d960-4f99-94ae-cc08e6d30d3f}</Project>
       <Name>cDTO</Name>
     </ProjectReference>
+    <ProjectReference Include="..\cFacade\cFacade.csproj">
+      <Project>{5fcc7d37-6aec-4190-b874-65d30d5b95bc}</Project>
+      <Name>cFacade</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CNegocio\cNegocio.csproj">
       <Project>{6b680fd4-5a83-430f-9593-6c50be0f0350}</Project>
       <Name>cNegocio</Name>
